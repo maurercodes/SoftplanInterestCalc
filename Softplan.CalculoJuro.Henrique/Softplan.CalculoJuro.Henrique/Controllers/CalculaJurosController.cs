@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace Softplan.CalculoJuro.Henrique.Controllers
 {
@@ -16,7 +17,11 @@ namespace Softplan.CalculoJuro.Henrique.Controllers
         [HttpGet]
         public decimal GetCalculaJuros(decimal valorInicial, int meses)
         {
-            return 105.10M;
+            var taxaJurosController = new TaxaJurosController();
+            double taxaJurosFixada = taxaJurosController.GetTaxaJuros();
+            decimal juroComposto = valorInicial * Convert.ToDecimal(Math.Pow(1 + taxaJurosFixada, meses));
+            //Truncar sem arredondar em duas casas decimais
+            return Convert.ToDecimal($"{Math.Truncate(100 * juroComposto) / 100:F2}");
         }
 
     }
