@@ -17,9 +17,11 @@ namespace Softplan.CalculoJuro.Henrique.Test
         }
 
         [Test]
-        public void Test1()
+        public void Deve_Retornar_Taxa_de_Juros_Fixada_De_1Porcento()
         {
-            Assert.Pass();
+            var taxaJurosFixada = _taxaJurosController.GetTaxaJuros();
+
+            Assert.IsTrue(taxaJurosFixada == 0.01f);
         }
     }
 }

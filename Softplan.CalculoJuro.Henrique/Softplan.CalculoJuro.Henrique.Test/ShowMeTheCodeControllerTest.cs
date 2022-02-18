@@ -18,9 +18,12 @@ namespace Softplan.CalculoJuro.Henrique.Test
         }
 
         [Test]
-        public void Test1()
+        public void Deve_Retornar_Url_Do_Fonte_GitHub()
         {
-            Assert.Pass();
+            var url = _showMeTheCodeController.GetShowMeTheCode();
+            Assert.IsTrue(url.ContentType == "text/html");
+            var minhaUrlGitHub = @"https://github.com/maurercodes/SoftplanInterestCalc";
+            Assert.IsTrue(url.Content.Contains(minhaUrlGitHub));
         }
     }
 }
